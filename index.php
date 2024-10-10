@@ -1,7 +1,7 @@
 <?php 
 require 'functions.php';
 // tampung rows ke variabel products
-$products = querydata("SELECT * FROM walini");
+$products = queryalldata();
 
 //ketika tombol search diklik
 if(isset($_POST['search'])){

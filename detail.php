@@ -5,7 +5,7 @@ require 'functions.php';
 $id = $_GET['id'];
 
 // query product berdasarkan id
-$prod = querydata("SELECT * FROM walini WHERE id = $id");
+$prod = querydetail($id);
 ?>
 
 <!DOCTYPE html>

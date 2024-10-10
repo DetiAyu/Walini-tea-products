@@ -5,8 +5,9 @@ function connection(){
 }
 
 //Query isi tabel walini
-function querydata($query){
+function queryalldata(){
     $conn = connection();
+    $query = "SELECT * FROM walini";
     $result = mysqli_query($conn, $query);
 
     //jika hasilnya hanya 1 data
@@ -20,6 +21,18 @@ function querydata($query){
     }
 return $rows;
 }
+
+
+//Query data walini untuk detail
+function querydetail($id){
+    $conn = connection();
+    $query = "SELECT * FROM walini WHERE id = $id";
+    $result = mysqli_query($conn, $query);
+
+    //hasilnya hanya 1 data
+   return mysqli_fetch_assoc($result);
+}
+
 
 // Fungsi untuk mengupload picture
 function upload() {
@@ -100,7 +113,7 @@ function delete($id) {
     $conn = connection();
 
     // menghapus gambar di folder img
-    $prod = querydata("SELECT * FROM walini WHERE id = $id");
+    $prod = querydetail($id);
     if($prod['picture'] != 'nopicture.jpg') {
     unlink('img/'. $prod['picture']);
     }
@@ -109,6 +122,17 @@ function delete($id) {
     mysqli_query($conn, $query) or die(mysqli_error($conn));
     return mysqli_affected_rows($conn);
 }
+
+//Query data walini untuk isi form sebelum diupdate
+function queryupdate($id){
+    $conn = connection();
+    $query = "SELECT * FROM walini WHERE id = $id";
+    $result = mysqli_query($conn, $query);
+
+    //hasilnya hanya 1 data
+   return mysqli_fetch_assoc($result);
+}
+
 
 // Fungsi untuk mengupdate data
 function update($data){
@@ -149,7 +173,5 @@ function search($keyword) {
     }
 return $rows;
 }
-
-
 
 ?>
