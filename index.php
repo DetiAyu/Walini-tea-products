@@ -23,11 +23,12 @@ if(isset($_POST['search'])){
     <br><br>
 
     <form action="" method="POST">
-        <input type="text" name="keyword" size="30" placeholder="type your search..." autocomplete="off" autofocus>
-        <button type="submit" name="search">Search</button>
+        <input type="text" name="keyword" size="30" placeholder="type your search..." autocomplete="off" autofocus class="keyword">
+        <button type="submit" name="search" class="search-button">Search</button>
     </form>
     <br>
 
+    <div class="container">
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
             <th>No</th>
@@ -57,5 +58,7 @@ if(isset($_POST['search'])){
         <?php } ?>
 
     </table>
+    </div>
+    <script src="js/script.js"></script>
 </body>
 </html>
