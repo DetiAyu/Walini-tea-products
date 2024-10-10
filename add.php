@@ -27,7 +27,7 @@ if(isset($_POST['add'])){
 </head>
 <body>
     <h3>Add Product Form</h3>
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         <ul>
             <li>
                 <label>
@@ -50,14 +50,16 @@ if(isset($_POST['add'])){
             <li>
                 <label>
                     Picture :
-                    <input type="text" name="picture">
+                    <input type="file" name="picture" class="picture" onchange="previewImage()">
                 </label>
+                <img src="img/nopicture.jpg" width="120" style="display: block" class="img-preview">
             </li>
             <li>
                 <button type="submit" name="add">Add Product</button>
             </li>
         </ul>
     </form>
+    <script src="js/script.js"></script>
     
 </body>
 </html>

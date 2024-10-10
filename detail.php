@@ -18,7 +18,7 @@ $prod = querydata("SELECT * FROM walini WHERE id = $id");
 <body>
     <h3>Detail Product</h3>
     <ul>
-        <li><img src="img/<?= $prod['picture']; ?>" width = "100px"></li>
+        <li><img src="img/<?= $prod['picture']; ?>" width = "250px"></li>
         <li>Name : <?= $prod['name']; ?></li>
         <li>Type : <?= $prod['type']; ?></li>
         <li>Price: <?= $prod['price']; ?></li>

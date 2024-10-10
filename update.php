@@ -33,7 +33,7 @@ if(isset($_POST['update'])){
 </head>
 <body>
     <h3>Update Product Form</h3>
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?= $prod['id']; ?>">
         <ul>
             <li>
@@ -55,16 +55,18 @@ if(isset($_POST['update'])){
                 </label>
             </li>
             <li>
+                <input type="hidden" name="old_picture" value="<?= $prod['picture']; ?>">
                 <label>
                     Picture :
-                    <input type="text" name="picture" value="<?= $prod['picture']; ?>">
+                    <input type="file" name="picture" class="picture" onchange="previewImage()">
                 </label>
+                <img src="img/<?= $prod['picture']; ?>" width="120" style="display: block" class="img-preview">
             </li>
             <li>
                 <button type="submit" name="update">Update Product</button>
             </li>
         </ul>
     </form>
-    
+    <script src="js/script.js"></script>
 </body>
 </html>
