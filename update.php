@@ -5,7 +5,7 @@ require 'functions.php';
 $id = $_GET['id'];
 
 // Query product berdasarkan id
-$prod = queryupdate($id);
+$prod = queryById($id);
 
 // cek apakah tombol update sudah ditekan
 if(isset($_POST['update'])){

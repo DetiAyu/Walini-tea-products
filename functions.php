@@ -4,8 +4,8 @@ function connection(){
     return mysqli_connect('localhost', 'root', '', 'myshop');
 }
 
-//Query isi tabel walini
-function queryalldata(){
+//Query semua data isi tabel walini
+function queryAll(){
     $conn = connection();
     $query = "SELECT * FROM walini";
     $result = mysqli_query($conn, $query);
@@ -23,8 +23,8 @@ return $rows;
 }
 
 
-//Query data walini untuk detail
-function querydetail($id){
+//Query berdasarkan ID data isi tabel walini
+function queryById($id){
     $conn = connection();
     $query = "SELECT * FROM walini WHERE id = $id";
     $result = mysqli_query($conn, $query);
@@ -76,7 +76,7 @@ function upload() {
         return false;
     }
 
-    // Lolos pengecekan -- siap upload file
+    // Lolos pengecekan --> siap upload file
     // generate nama file baru
     $new_file_name = uniqid();
     $new_file_name .= '.';
@@ -86,7 +86,6 @@ function upload() {
 
     return $new_file_name;
 }
-
 
 // Fungsi untuk menambahkan data
 function add($data){
@@ -103,8 +102,7 @@ function add($data){
     }
 
     $query = "INSERT INTO walini VALUES (null, '$name', '$type', '$price', '$picture');";
-    mysqli_query($conn, $query) or die(mysqli_error($conn));
-    echo mysqli_error($conn);
+    mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);
 }
 
@@ -113,26 +111,15 @@ function delete($id) {
     $conn = connection();
 
     // menghapus gambar di folder img
-    $prod = querydetail($id);
+    $prod = queryById($id);
     if($prod['picture'] != 'nopicture.jpg') {
     unlink('img/'. $prod['picture']);
     }
 
     $query = "DELETE FROM walini WHERE id = $id";
-    mysqli_query($conn, $query) or die(mysqli_error($conn));
+    mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);
 }
-
-//Query data walini untuk isi form sebelum diupdate
-function queryupdate($id){
-    $conn = connection();
-    $query = "SELECT * FROM walini WHERE id = $id";
-    $result = mysqli_query($conn, $query);
-
-    //hasilnya hanya 1 data
-   return mysqli_fetch_assoc($result);
-}
-
 
 // Fungsi untuk mengupdate data
 function update($data){
@@ -145,19 +132,20 @@ function update($data){
     $old_picture = htmlspecialchars($data['old_picture']);
 
     $picture = upload();
-    if (!$picture) {
-        return false;
+    if($picture != 'nopicture.jpg' && $old_picture != 'nopicture.jpg') {
+        unlink('img/'. $old_picture);
+    } elseif($picture == 'nopicture.jpg') {
+        $picture = $old_picture;
     }
 
-    if($picture == 'nopicture.jpg') {
-        $picture = $old_picture;
+    if (!$picture) {
+        return false;
     }
 
     $query = "UPDATE walini 
             SET name='$name', type='$type', price='$price', picture='$picture' 
             WHERE id=$id";
-    mysqli_query($conn, $query) or die(mysqli_error($conn));
-    echo mysqli_error($conn);
+    mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);
 }
 

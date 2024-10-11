@@ -5,7 +5,7 @@ require 'functions.php';
 $id = $_GET['id'];
 
 // query product berdasarkan id
-$prod = querydetail($id);
+$prod = queryById($id);
 ?>
 
 <!DOCTYPE html>
